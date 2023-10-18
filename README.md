@@ -1,7 +1,7 @@
 # chatter-judge
 
 ## Getting Started
-Python version `python3.10` with `requests`, `beautifulsoup4`, `python-dotenv`, `fake-useragent`
+Python version `python3.10` with `gradio`, `fastapi`.
 
 ### Clone the repo
 ```bash
