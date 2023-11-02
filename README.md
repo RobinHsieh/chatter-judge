@@ -1,13 +1,7 @@
-# chatter-judge
+# Chatter Judge
 
 ## Getting Started
 Python version `python3.10` with `gradio`, `fastapi`.
-
-### Clone the repo
-```bash
-$ git clone
-$ cd chatter-judge
-```
 
 ### Build `venv` for **MacOS**
 ```shell

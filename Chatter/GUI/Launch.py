@@ -19,7 +19,7 @@ def build_chatter_judge(
     ) -> None:
 
     demo = gr.Blocks(
-        title='EE-Judge',
+        title='Chatter Judge',
     )
 
     with demo:
@@ -34,19 +34,28 @@ def build_chatter_judge(
 
             with gr.Row():
                 with gr.Column("Question part"):
+
+                    with gr.Row():
+                        selected_homework_name = gr.Dropdown(
+                            label="⛳️ Select Homework", 
+                            value=question.homework_sessions[0],
+                            choices=question.homework_sessions,
+                            interactive=True,
+                        )
+
+                        selected_question_name = gr.Dropdown(
+                            label="📸 Select Question", 
+                            value=question.question_sessions[0],
+                            choices=question.question_sessions,
+                            interactive=True,
+                        )
+
                     gr.Markdown(
                         heaader.question_descriptions_header
                     )
 
-                    selected_question_name = gr.Dropdown(
-                        label="Select Question", 
-                        value=question.question_sessions[0],
-                        choices=question.question_sessions,
-                        interactive=True,
-                    )
-
                     question_description = gr.Markdown(
-                        question.question_one_description, 
+                        question.homework_one_content_sessions[0], 
                         visible=True,
                     )
                 with gr.Column():
@@ -67,9 +76,11 @@ def build_chatter_judge(
                     )
 
             with gr.Row():
-                txt = gr.Textbox(
-                    label="Paste Your code here", 
-                    info="Initial text",
+
+                answer_code = gr.Code(
+                    label="Write Your code here", 
+                    language="python",
+                    # info="Initial text",
                 )
 
             with gr.Row():
@@ -84,7 +95,7 @@ def build_chatter_judge(
                 )
                 btn.click(
                     get_code, 
-                    inputs=[txt], 
+                    inputs=[answer_code], 
                     outputs=[txt_3],
                 )
 
@@ -104,6 +115,7 @@ def build_chatter_judge(
             )
 
         background_listener(
+            selected_homework_name,
             selected_question_name,
             question_description
         )
