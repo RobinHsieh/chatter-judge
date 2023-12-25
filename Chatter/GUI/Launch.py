@@ -101,17 +101,22 @@ def build_chatter_judge(
 
         with gr.Tab("Submitted History"):
             gr.Markdown(
-                "We will record the submitted history in the future..."
+                heaader.submitted_history_page_header
             )
 
         with gr.Tab("Race Bar"):
             gr.Markdown(
-                "We will record the Race Bar in the future..."
+                heaader.race_bar_page_header
             )
 
         with gr.Tab("Judge Mechanism"):
             gr.Markdown(
-                "We will record the judge mechanism in the future..."
+                heaader.judge_mechanism_page_header
+            )
+
+        with gr.Tab("Judge Developers"):
+            gr.Markdown(
+                heaader.judger_developer_page_header
             )
 
         background_listener(
