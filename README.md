@@ -22,6 +22,14 @@ $ deactivate
 $ rmdir /s venv     # remove the venv
 ```
 
+### Run the server
+```shell
+$ ./build.sh
+
+# or
+$ uvicorn run:main --host 127.0.0.1 --port 5002
+```
+
 ## License
 Released under [MIT](./LICENSE) by [Hugo ChunHo Lin](https://github.com/1chooo).
 
