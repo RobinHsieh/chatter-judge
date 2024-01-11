@@ -12,11 +12,12 @@ from Chatter.ChatBot.Chat import respond
 from Chatter.Utils.Listener import background_listener
 from Chatter.GUI.Information import Header as heaader
 from Chatter.GUI.Information import Question as question
+from Chatter.GUI.Login import Auth as auth
 
 def build_chatter_judge(
         *args: Any, 
         **kwargs: Any,
-    ) -> None:
+    ) -> gr.Blocks:
 
     demo = gr.Blocks(
         title='Chatter Judge',
@@ -124,5 +125,9 @@ def build_chatter_judge(
             selected_question_name,
             question_description
         )
+
+
+    demo.auth=auth.auth_admin
+    demo.auth_message = 'Welcome to Chatter Judge!!!'
 
     return demo
