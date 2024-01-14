@@ -7,16 +7,16 @@ Version: v0.0.1
 
 from Chatter.Utils.Update import get_question_description
 
-def background_listener(
+def submit_background_listener(
         selected_homework_name,
         selected_question_name,
         test_word,
     ):
     selected_question_name.change(
-            fn=get_question_description,
-            inputs=[
-                selected_homework_name,
-                selected_question_name,
-            ],
-            outputs=test_word,
-        )
+        fn=get_question_description,
+        inputs=[
+            selected_homework_name,
+            selected_question_name,
+        ],
+        outputs=test_word,
+    )

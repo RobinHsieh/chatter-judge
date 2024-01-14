@@ -7,11 +7,7 @@ Version: v0.0.1
 
 import gradio as gr
 from typing import Any
-from Chatter.Judge.Judge import get_code
-from Chatter.ChatBot.Chat import respond
-from Chatter.Utils.Listener import background_listener
 from Chatter.GUI.Information import Header as heaader
-from Chatter.GUI.Information import Question as question
 from Chatter.GUI.Login import Auth as auth
 from Chatter.GUI.Tab import History as history
 from Chatter.GUI.Tab import Submit as submit
@@ -47,9 +43,6 @@ def build_chatter_judge(
             gr.Markdown(
                 heaader.judger_developer_page_header
             )
-
-        submit_tab = submit.init_submit_tab()
-
 
     # demo.auth=auth.auth_admin             # temporary disable auth
     # demo.auth_message = 'Welcome to Chatter Judge!!!'

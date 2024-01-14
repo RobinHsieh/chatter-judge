@@ -8,7 +8,8 @@ Version: v0.0.1
 import os
 import subprocess
 
-def get_code(txt):
+def get_code(txt, selected_homework_name,
+        selected_question_name, *args, **kwargs):
     with open("tmp.py", "w") as file:
         file.write(txt)
 
@@ -31,8 +32,8 @@ def get_code(txt):
 
 def judge_question_1(output):
     if output == "Hello World\n":
-        return "AC"
+        return "### Your code results: AC"
     elif output == "Hello World":
-        return "AC"
+        return "### Your code results: AC"
     else:
-        return "WA"
+        return "### Your code results: WA"

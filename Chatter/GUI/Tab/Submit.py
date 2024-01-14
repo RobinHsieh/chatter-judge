@@ -9,7 +9,7 @@ import gradio as gr
 from typing import Any
 from Chatter.Judge.Judge import get_code
 from Chatter.ChatBot.Chat import respond
-from Chatter.Utils.Listener import background_listener
+from Chatter.Utils.Listener import submit_background_listener
 from Chatter.GUI.Information import Header as heaader
 from Chatter.GUI.Information import Question as question
 from Chatter.GUI.Information import Header as heaader
@@ -48,52 +48,68 @@ def init_submit_tab():
                     visible=True,
                 )
             with gr.Column():
-                chatbot = gr.Chatbot(
+                chat_history = gr.Chatbot(
                     label="EE Chat",
                     show_label=True,
                 )
                 msg = gr.Textbox(
                     label="Tell me something..."
                 )
-                clear = gr.ClearButton(
-                    [msg, chatbot]
+                gr.ClearButton(
+                    components=[
+                        msg, 
+                        chat_history,
+                    ],
                 )
                 msg.submit(
-                    respond, 
-                    [msg, chatbot], 
-                    [msg, chatbot],
+                    fn=respond, 
+                    inputs=[
+                        msg, 
+                        chat_history,
+                    ], 
+                    outputs=[
+                        msg, 
+                        chat_history,
+                    ],
                 )
 
         with gr.Row():
 
-            answer_code = gr.Code(
-                label="Write Your code here", 
-                language="python",
-                # info="Initial text",
-            )
+            with gr.Column():
+                answer_code = gr.Code(
+                    label="Write Your code here", 
+                    language="python",
+                    lines=10,
+                    # info="Initial text",
+                )
 
-        with gr.Row():
-            txt_3 = gr.Textbox(
-                label="Your code results",
-                info="Initial text",
-            )
+            with gr.Column():
+                judged_result = gr.Markdown(
+                    f"### Your code results: "
+                )
 
-        with gr.Row():
-            btn = gr.Button(
-                value="Submit",
-            )
-            btn.click(
-                get_code, 
-                inputs=[answer_code], 
-                outputs=[txt_3],
-            )
+                submit_code_btn = gr.Button(
+                    value="Submit",
+                )
 
-    background_listener(
+                submit_code_btn.click(
+                    get_code, 
+                    inputs=[
+                        answer_code,
+                        selected_homework_name,
+                        selected_question_name,
+                    ], 
+                    outputs=[
+                        judged_result
+                    ],
+                )
+
+    submit_background_listener(
         selected_homework_name,
         selected_question_name,
         question_description
     )
 
-    # the next try listener and update in the background
+    
 
     return submit_tab
