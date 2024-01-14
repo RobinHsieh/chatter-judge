@@ -13,6 +13,6 @@ async def respond(message, chat_history):
         ["How are you?", "I love you", "I'm very hungry"]
     )
     chat_history.append((message, bot_message))
-    await asyncio.sleep(2)
+    # await asyncio.sleep(2)    # temporarily stop delay reply
 
     return "", chat_history
