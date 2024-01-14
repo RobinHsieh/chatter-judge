@@ -81,5 +81,7 @@ extra:
 
 nav:
     - Overview: index.md
+    - Getting Started: getting_started/index.md
+    - Developer's Guide: developers_guide/index.md
     - LICENSE: LICENSE/index.md
     - Report Issues: https://github.com/1chooo/chatter-judge/issues
