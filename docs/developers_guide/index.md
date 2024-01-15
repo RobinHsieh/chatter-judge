@@ -1,4 +1,4 @@
-# Chatter Judge
+# Welcome Contributors
 
 ## Collaboration Guidelines
 ### Forking this Repository:
@@ -27,15 +27,15 @@ If you have any valuable ideas to contribute, please create a pull request and p
 ### Issue Reporting:
 If you encounter any problems while contributing to this project, please report the issues in the [chatter-judge/issues](https://github.com/1chooo/chatter-judge/issues) section.
 
-
 ### Important Notes:
-> [!IMPORTANT]  
-> #### Make sure to synchronize and update your repository before initiating a pull request:
-> 1. Run `git stash save` to temporarily stash your local changes.
-> 2. Run `git fetch upstream` to sync the source project with your local copy.
-> 3. Run `git checkout main` to switch to the main branch.
-> 4. Run `git merge upstream/main` to merge the updated remote version into your local copy. If there are no conflicts, the update process is complete.
-> 5. Run `git stash pop` to apply your temporarily stashed changes back to your working directory. Resolve any conflicts if necessary.
+
+#### Make sure to synchronize and update your repository before initiating a pull request:
+
+1. Run `git stash save` to temporarily stash your local changes.
+2. Run `git fetch upstream` to sync the source project with your local copy.
+3. Run `git checkout main` to switch to the main branch.
+4. Run `git merge upstream/main` to merge the updated remote version into your local copy. If there are no conflicts, the update process is complete.
+5. Run `git stash pop` to apply your temporarily stashed changes back to your working directory. Resolve any conflicts if necessary.
 
 ## Developing Requirements
 
@@ -73,11 +73,3 @@ $ uvicorn run:main --host 127.0.0.1 --port 5002
 $ mkdocs server
 $ mkdocs build
 ```
-
-
-## License
-Released under [MIT](./LICENSE) by [Hugo ChunHo Lin](https://github.com/1chooo).
-
-This software can be modified and reused without restriction.
-The original license must be included with any copies of this software.
-If a significant portion of the source code is used, please provide a link back to this repository.
