@@ -8,11 +8,18 @@ Version: v0.0.1
 import random
 import asyncio
 
-async def respond(message, chat_history):
+async def respond(
+        message, 
+        chat_history, 
+        *args, 
+        **kwargs,
+    ):
     bot_message = random.choice(
         ["How are you?", "I love you", "I'm very hungry"]
     )
-    chat_history.append((message, bot_message))
+    # chat_history.append((message, bot_message))
     # await asyncio.sleep(2)    # temporarily stop delay reply
-
-    return "", chat_history
+    print(f"message: {message}")
+    print(f"chat_history: {chat_history}")
+    print(*args)
+    return bot_message

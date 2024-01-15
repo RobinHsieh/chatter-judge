@@ -13,16 +13,20 @@ from Chatter.Utils.Listener import submit_background_listener
 from Chatter.GUI.Information import Header as heaader
 from Chatter.GUI.Information import Question as question
 from Chatter.GUI.Information import Header as heaader
+from Chatter.Judge.Plot import make_plot
+import pandas as pd
 
-def init_submit_tab():
+def init_submit_tab(*args, **kwargs):
 
     with gr.Tab("Submit Your Code") as submit_tab:
         gr.Markdown(
             heaader.submit_page_header
         )
 
-        with gr.Row():
-            with gr.Column("Question part"):
+        with gr.Row(
+            # variant="compact",
+        ):
+            with gr.Column("Question part", variant="compact",):
 
                 with gr.Row():
                     selected_homework_name = gr.Dropdown(
@@ -47,33 +51,19 @@ def init_submit_tab():
                     question.homework_one_content_sessions[0], 
                     visible=True,
                 )
-            with gr.Column():
-                chat_history = gr.Chatbot(
-                    label="EE Chat",
-                    show_label=True,
-                )
-                msg = gr.Textbox(
-                    label="Tell me something..."
-                )
-                gr.ClearButton(
-                    components=[
-                        msg, 
-                        chat_history,
-                    ],
-                )
-                msg.submit(
+
+            with gr.Column(variant="default",):
+                gr.ChatInterface(
                     fn=respond, 
-                    inputs=[
-                        msg, 
-                        chat_history,
-                    ], 
-                    outputs=[
-                        msg, 
-                        chat_history,
+                    # examples=["hello", "hola", "merhaba"],
+                    additional_inputs=[
+                        selected_homework_name,
+                        selected_question_name,
                     ],
+                    undo_btn=None,
                 )
 
-        with gr.Row():
+        with gr.Row(variant="compact",):
 
             with gr.Column():
                 answer_code = gr.Code(
@@ -83,33 +73,67 @@ def init_submit_tab():
                     # info="Initial text",
                 )
 
+                with gr.Row():
+                    clear_code_btn = gr.Button(
+                        value="🗑️  Clear",
+                        variant="secondary",
+                    )
+                    submit_code_btn = gr.Button(
+                        value="Submit",
+                        variant="primary",
+                    )
+
+
             with gr.Column():
                 judged_result = gr.Markdown(
-                    f"### Your code results: "
+                    f"### Results of your submission: "
                 )
 
-                submit_code_btn = gr.Button(
-                    value="Submit",
-                )
+                # chatgpt_suggestion = gr.Markdown(
+                #     f"### Review by ChatGPT: "
+                # )
+                with gr.Row() as visualized_result:
+                    plot = gr.Plot(
+                        value=make_plot("scatter_plot"),
+                        label="Plotttttt",
+                        scale=4,
+                        interactive=True,
+                        # show_actions_button=True,
+                    )
 
-                submit_code_btn.click(
-                    get_code, 
-                    inputs=[
-                        answer_code,
-                        selected_homework_name,
-                        selected_question_name,
-                    ], 
-                    outputs=[
-                        judged_result
-                    ],
-                )
+                    plot_type_btn = gr.Radio(
+                        scale=1,
+                        label="Plot type",
+                        choices=[
+                            "AC",
+                            "WA",
+                            "TLE",
+                            "MLE",
+                            "RE",
+                            "CE",
+                            "ChatGPT",
+                        ],
+                        value="AC",
+                        interactive=True,
+                    )
+
+
+    submit_code_btn.click(
+        get_code, 
+        inputs=[
+            answer_code,
+            selected_homework_name,
+            selected_question_name,
+        ], 
+        outputs=[
+            judged_result
+        ],
+    )
 
     submit_background_listener(
         selected_homework_name,
         selected_question_name,
         question_description
     )
-
-    
 
     return submit_tab
