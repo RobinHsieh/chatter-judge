@@ -83,5 +83,10 @@ nav:
     - Overview: index.md
     - Getting Started: getting_started/index.md
     - Developer's Guide: developers_guide/index.md
+    - WIKI:
+        - Home: wiki/index.md
+        - wiki/01_chatter_structure.md
+        - wiki/02_unit_test.md
+        - wiki/03_ci_cd_actions.md
     - LICENSE: LICENSE/index.md
     - Report Issues: https://github.com/1chooo/chatter-judge/issues
