@@ -89,7 +89,7 @@ Welcome! This is the register page for Chatter Judge. (WIP)"""  # 保持英文
                 # 用户名和密码输入框
                 gr.Textbox(label="Username", elem_id="username", interactive=True)
                 gr.Textbox(label="Password", elem_id="password", type="password", interactive=True)
-                gr.Button("Login", elem_id="login", interactive=True)  # 登錄按钮
+                gr.Button("register", elem_id="register", interactive=True)  # 登錄按钮
 
         # TODO: Put this ugly js hack into a separate file
         home.load(
