@@ -19,17 +19,21 @@ ADMIN_PATH = "/admin/"
 
 
 def build_and_mount_playground(app: FastAPI) -> FastAPI:
+    """构建并挂载 playground"""
+
+    # 构建 Chatter Judge 页面
     playground = build_chatter_judge()
-    playground.favicon_path = FAVICON_PATH
+    playground.favicon_path = FAVICON_PATH  # 设置 Favicon 图标
+    app = gr.mount_gradio_app(app, playground, path=JUDGE_PATH)  # 挂载到 JUDGE_PATH 路径
 
-    app = gr.mount_gradio_app(app, playground, path=JUDGE_PATH)
-
+    # 构建管理面板页面
     playground = build_admin_management()
-    playground.favicon_path = FAVICON_PATH
-    app = gr.mount_gradio_app(app, playground, path=ADMIN_PATH)
+    playground.favicon_path = FAVICON_PATH  # 设置 Favicon 图标
+    app = gr.mount_gradio_app(app, playground, path=ADMIN_PATH)  # 挂载到 ADMIN_PATH 路径
 
+    # 构建首页
     playground = build_home_page()
-    playground.favicon_path = FAVICON_PATH
-    app = gr.mount_gradio_app(app, playground, path="/")
+    playground.favicon_path = FAVICON_PATH  # 设置 Favicon 图标
+    app = gr.mount_gradio_app(app, playground, path="/")  # 挂载到根路径
 
     return app
