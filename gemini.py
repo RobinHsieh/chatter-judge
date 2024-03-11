@@ -4,7 +4,7 @@ import requests
 import time
 
 # 定義 Google Cloud Generative Language API 的 API 金鑰 (API_KEY)
-API_KEY = "AIzaSyCXCXxAcCQKxv-VAm7E0UnTNINXf3svPew"
+API_KEY = ""
 
 # 定義對話狀態 (conversation_state)
 conversation_state = {
