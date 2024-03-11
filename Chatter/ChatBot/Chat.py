@@ -33,7 +33,7 @@ async def respond(
         *args, 
         **kwargs,
     ):
-    API_KEY = "AIzaSyBE9CIN4RMUKl0qUcSScFr3avWbEUjUOos"
+    API_KEY = ""
 
     # 定義對話狀態 (conversation_state)
     conversation_state = {
@@ -99,7 +99,7 @@ async def respond(
             conversation_state['contents'].append(model_output)
 
     init_dialog(chat_history)
-
+    
     # 將使用者輸入轉換成符合格式的資料 (user_word)
     user_input = user_word(message)
 
