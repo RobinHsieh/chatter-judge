@@ -66,7 +66,7 @@ $ rmdir /s venv     # remove the venv
 ```shell
 # set the GEMINI_API_KEY to your environment
 # Windows:
-$ set GEMINI_API_KEY=your_gemini_api_key
+$ $env:GEMINI_API_KEY="your_gemini_api_key"
 # MacOS/Linux:
 $ export GEMINI_API_KEY=your_gemini_api_key
 # Then:

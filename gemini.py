@@ -108,10 +108,9 @@ while True:
 
   # 生成對使用者輸入的回應 (generate_response)
   response = generate_response(conversation_state)
-
+  print(response)
   # 解析來自 API 的 JSON 回應 (response_data)
   response_data = json.loads(response)
-  print(response)
   # 解析來自 API 的 JSON 回應 (response_data)
   generated_text = response_data["candidates"][0]['content']['parts'][0]['text']
 

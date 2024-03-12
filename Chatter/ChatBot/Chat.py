@@ -9,7 +9,11 @@ import os
 
 import requests
 
+# 從環境變數讀取 API 金鑰
 API_KEY = os.environ.get("GEMINI_API_KEY")
+
+if not API_KEY:
+    raise ValueError("GEMINI_API_KEY 環境變數未設置")
 
 
 async def respond(
