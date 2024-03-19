@@ -53,7 +53,8 @@ $ docker-compose stop
 # stop the container and discard the container
 $ docker-compose down
 ```
-
+<!-- 王子祐的註解:帳號密碼需註冊，無寫死
+如果依賴項變更請使用 docker-compose up -d --build 替換 -->
 ### Build Docs
 ```shell
 $ mkdocs server

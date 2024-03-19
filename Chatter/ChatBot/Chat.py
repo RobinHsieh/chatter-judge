@@ -79,7 +79,7 @@ async def respond(
 
     user_input = user_word(message)
     prompt.append(user_input)
-    
+    print(prompt)
     try:
         response = model.generate_content(prompt)
     except:
