@@ -1,5 +1,7 @@
 # Chatter Judge
 
+Chatter Judge is a FastAPI-based module designed by @1chooo (Hugo ChunHo Lin) to provide a simple judging platform integrated with ChatGPT. This module allows users to interact with the ChatGPT model through a web interface, making it easy to submit queries and receive responses.
+
 ## Collaboration Guidelines
 ### Forking this Repository:
 
@@ -66,6 +68,19 @@ $ ./build.sh
 
 # or
 $ uvicorn run:main --host 127.0.0.1 --port 5002
+```
+
+### Build and run with docker
+
+```shell
+# build the docker image and run the container
+$ docker-compose up -d
+# follow the logs
+$ docker-compose logs -f
+# stop the container but keep the container
+$ docker-compose stop
+# stop the container and discard the container
+$ docker-compose down
 ```
 
 ### Build Docs
