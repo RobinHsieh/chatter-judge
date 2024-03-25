@@ -21,7 +21,7 @@ question_one_description = """\
 
 ```python
 def hw1_0():
-    string1 = "小明花105元買了蘋果"
+    string1 = "小明花104元買了蘋果"
     string2 = "小華花130元買了香蕉"
     #-------------------------------
     # 注意cost為字串(string)的型別

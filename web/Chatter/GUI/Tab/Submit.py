@@ -95,7 +95,7 @@ def init_submit_tab(*args, **kwargs):
                 with gr.Row() as visualized_result:
                     plot = gr.Plot(
                         value=make_plot("scatter_plot"),
-                        label="Plotttttt",
+                        label="Plot",
                         scale=4,
                         interactive=True,
                         # show_actions_button=True,
