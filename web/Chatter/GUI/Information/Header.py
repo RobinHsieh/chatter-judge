@@ -7,7 +7,7 @@ Version: v0.0.1
 
 ee_judge_header = """\
 <div align="center"> 
-    <h1>🏗 Chatter Judge</h1> 
+    <h1>🏗 Chatterrrrrr Judge</h1> 
 </div>
 """
 

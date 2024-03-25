@@ -8,7 +8,7 @@ Version: v0.0.1
 import gradio as gr
 from typing import Any
 from Chatter.Judge.Judge import execute_code
-from Chatter.ChatBot.Chat import respond
+from Chatter.ChatBot.Chat import call_chat_api
 from Chatter.Utils.Listener import submit_background_listener
 from Chatter.GUI.Information import Header as heaader
 from Chatter.GUI.Information import Question as question
@@ -54,7 +54,7 @@ def init_submit_tab(*args, **kwargs):
 
             with gr.Column(variant="default",):
                 gr.ChatInterface(
-                    fn=respond, 
+                    fn=call_chat_api, 
                     # examples=["hello", "hola", "merhaba"],
                     additional_inputs=[
                         selected_homework_name,
