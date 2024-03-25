@@ -17,7 +17,7 @@ question_sessions = [
 
 question_one_description = """\
 ### Q1
-> 將價錢 ( 105、130 ) 用字串 slice 方式取出，並相加後，並賦值給變數 cost
+> 將價錢 ( 104、130 ) 用字串 slice 方式取出，並相加後，並賦值給變數 cost
 
 ```python
 def hw1_0():
