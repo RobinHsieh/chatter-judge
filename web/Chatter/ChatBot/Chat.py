@@ -6,36 +6,23 @@
 # """
 import google.generativeai as genai
 import os
+import csv
+
 
 # 從環境變數讀取 API 金鑰
 API_KEY = os.environ.get("GEMINI_API_KEY")
 
-# 設定對話的問題與回答
-message = ""
-prompt_parts = [
-  "在教授有關於電腦工程、資訊科學的課程中，我們開放同學問問題，請幫我擷取這個問題的核心大綱，例如：「語法說明, 運算子」、「程式語法錯誤, 除以零」。",
-  "問題主體 (2 + 2) * 2 和 2 + 2 * 2 有什麼不一樣？",
-  "問題分類 語法說明, 運算子",
-  "問題主體 下列的程式哪裡錯誤：\n```\ndef get_code(txt, selected_homework_name,\n        selected_question_name, *args, **kwargs):\n    with open(\"tmp.py\", \"w\") as file:\n        file.write(txt)\n\n    try:\n        output = subprocess.check_output[\n            [\"python\", \"tmp.py\"], \n            stderr=subprocess.STDOUT, \n            universal_newlines=True,\n        )\n        print(\"Script output:\")\n        print(output)\n\n        result = judge_question_1(output)\n        return result\n    except subprocess.CalledProcessError as e:\n        print(\"Error:\", e.output)\n        return e.output\n    finally:\n        os.remove(\"tmp.py\")\n```",
-  "問題分類 程式語法錯誤, 函數調用",
-  "問題主體 __init__ 在 python 中是做什麼用的？ 和 C++ 的 constructor 有什麼差別？",
-  "問題分類 程式語法, 建構子",
-  "問題主體 from a import * 和 import a 有什麼差別？",
-  "問題分類 語法說明, 模組導入",
-  f"問題主體 {message}",
-  "問題分類 ",
-]
 
 if not API_KEY:
     raise ValueError("GEMINI_API_KEY 環境變數未設置")
 
-def save_to_csv(response_text, response_category):
-    import csv
+async def save_to_csv(prompt_parts, response_category):
+    # import csv
     current_working_directory = os.getcwd()
     with open('chatbot.csv', mode='w') as file:
         writer = csv.writer(file)
         writer.writerow(['Question', 'Category'])
-        writer.writerow([message, response_category])    
+        writer.writerow([prompt_parts, response_category])    
         
     return current_working_directory
 
@@ -45,17 +32,36 @@ async def call_chat_api(
     chat_history,
     *args,
     **kwargs,
-):
+    ):
+
+    prompt_parts = [
+        "在教授有關於電腦工程、資訊科學的課程中，我們開放同學問問題，請幫我擷取這個問題的核心大綱，例如：「語法說明, 運算子」、「程式語法錯誤, 除以零」。",
+        "問題主體 (2 + 2) * 2 和 2 + 2 * 2 有什麼不一樣？",
+        "問題分類 程式語法說明, 運算子",
+        "問題主體 下列的程式哪裡錯誤：\n```\ndef get_code(txt, selected_homework_name,\n        selected_question_name, *args, **kwargs):\n    with open(\"tmp.py\", \"w\") as file:\n        file.write(txt)\n\n    try:\n        output = subprocess.check_output[\n            [\"python\", \"tmp.py\"], \n            stderr=subprocess.STDOUT, \n            universal_newlines=True,\n        )\n        print(\"Script output:\")\n        print(output)\n\n        result = judge_question_1(output)\n        return result\n    except subprocess.CalledProcessError as e:\n        print(\"Error:\", e.output)\n        return e.output\n    finally:\n        os.remove(\"tmp.py\")\n```",
+        "問題分類 程式語法錯誤, 函數調用",
+        "問題主體 __init__ 在 python 中是做什麼用的？ 和 C++ 的 constructor 有什麼差別？",
+        "問題分類 程式語法說明, 建構子",
+        "問題主體 from a import * 和 import a 有什麼差別？",
+        "問題分類 程式語法說明, 模組導入",
+        "問題主體 下面的程式碼中，safety_settings 的 type 是什麼：\n\n```\nsafety_settings = [    {        \"category\": \"HARM_CATEGORY_HARASSMENT\",        \"threshold\": \"BLOCK_NONE\"    },    {        \"category\": \"HARM_CATEGORY_HATE_SPEECH\",        \"threshold\": \"BLOCK_NONE\"    },    {        \"category\": \"HARM_CATEGORY_SEXUALLY_EXPLICIT\",        \"threshold\": \"BLOCK_NONE\"    },    {        \"category\": \"HARM_CATEGORY_DANGEROUS_CONTENT\",        \"threshold\": \"BLOCK_NONE\"    },    ]\n```",
+        "問題分類 程式語言, 資料型態",
+        "問題主體 __init__.py 的用處是什麼？",
+        "問題分類 檔案結構, 模組導入",
+        f"問題主體 {message}",
+        "問題分類 ",
+        ]
+    
     # 呼叫 gemini API, 並回傳問題的回應
-    response_text = respond(message, chat_history)
+    response_text = await respond(message, chat_history)
 
     # 呼叫 gemini API, 並回傳問題的分類結果
-    response_category = respond(prompt_parts)
+    response_category = await respond(prompt_parts, chat_history)
 
     # 將提問的問題與問題的分類結果存入 csv 檔案
-    current_working_directory = save_to_csv(message, response_category)
+    current_working_directory = await save_to_csv(message, response_category)
 
-    return response_text + current_working_directory
+    return f"{response_text}\n{response_category}"
 
     
 
